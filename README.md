@@ -29,6 +29,7 @@ Optimized WebP originals used with permission. Files are located in `assets/phot
 - The owner should verify **all menu prices, descriptions, catering claims and artwork availability**, as restaurant websites are not necessarily updated in real time.
 
 ## Outstanding
+- Check the published site on a real iPhone and Android browser and run Google PageSpeed Insights after domain launch.
 - Confirm legal rights to reuse photographs and owner approval of text.
 - Connect Google Search Console and submit sitemap once domain points at this site.
 - Test redirects on Cloudflare after deploy; `_redirects` is a Cloudflare Pages feature.

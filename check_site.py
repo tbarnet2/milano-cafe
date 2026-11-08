@@ -28,7 +28,7 @@ with sync_playwright() as p:
   errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
   url={'home-desktop':'index.html','home-mobile':'index.html','menu-desktop':'menu.html','gallery-mobile':'gallery.html'}[name]
   html=(root/url).read_text()
-  html=html.replace('<link rel="stylesheet" href="assets/css/site.css">','<style>'+ (root/'assets/css/site.css').read_text().split('\n',1)[1] +'</style>')
+  html=html.replace('<link rel="stylesheet" href="assets/css/site.css">','<style>'+ (root/'assets/css/site.css').read_text() +'</style>')
   html=html.replace('<script src="assets/js/site.js" defer></script>','<script>'+ (root/'assets/js/site.js').read_text() +'</script>')
   def data_photo(m):
    raw=(root/m.group(1)).read_bytes()

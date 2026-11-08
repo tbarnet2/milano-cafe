@@ -12,10 +12,21 @@ MAP='https://www.google.com/maps/search/?api=1&query=4601+Southwest+Parkway+Aust
 EMAIL='cafemilanoaustin@gmail.com'
 PHONE='(512) 428-6076'
 PHOTO='assets/photos/'
+# Original image dimensions. Explicit dimensions reduce visual movement while images load.
+PHOTO_SIZES = {
+    'artwork-detail': (1350, 1800), 'coffee-dessert': (1350, 1013),
+    'color-room': (1350, 1800), 'dessert': (1350, 1013),
+    'dining-room': (1600, 1200), 'food-spread': (1350, 1800),
+    'gallery-portraits': (1350, 1013), 'gallery-wall': (1600, 1200),
+    'hero-gallery': (2000, 1500), 'pasta': (1350, 1800),
+    'pizza': (1350, 1800), 'quiet-corner': (1350, 1800),
+    'table-spread': (1600, 1200), 'window-table': (1350, 1800),
+}
 
 
 def photo(name,alt,**kwargs):
-    attributes={'loading':'lazy','decoding':'async',**kwargs}
+    width, height = PHOTO_SIZES[name]
+    attributes={'loading':'lazy','decoding':'async','width':width,'height':height,**kwargs}
     opts=' '.join(f'{k.replace("_","-")}="{escape(str(v),quote=True)}"' for k,v in attributes.items())
     return f'<img src="{PHOTO}{name}.webp" alt="{escape(alt,quote=True)}" {opts}>'
 
@@ -59,9 +70,10 @@ def render(path,title,description,body,og='hero-gallery',keywords=None):
 <title>{escape(title)}</title><meta name="description" content="{escape(description,quote=True)}">
 <link rel="canonical" href="{canonical}"><link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#1b211d"><meta name="robots" content="index,follow">
-<meta property="og:type" content="website"><meta property="og:site_name" content="Milano Café &amp; Art Gallery"><meta property="og:title" content="{escape(title,quote=True)}"><meta property="og:description" content="{escape(description,quote=True)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{DOMAIN}/assets/photos/{og}.webp">
+<meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:site_name" content="Milano Café &amp; Art Gallery"><meta property="og:title" content="{escape(title,quote=True)}"><meta property="og:description" content="{escape(description,quote=True)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{DOMAIN}/assets/photos/{og}.webp"><meta property="og:image:alt" content="Milano Café &amp; Art Gallery in Austin, Texas">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap">
 <link rel="preload" as="image" href="assets/photos/{og}.webp">
 <link rel="stylesheet" href="assets/css/site.css">
 <script type="application/ld+json">{ldjson()}</script>
@@ -281,6 +293,7 @@ Optimized WebP originals used with permission. Files are located in `assets/phot
 - The owner should verify **all menu prices, descriptions, catering claims and artwork availability**, as restaurant websites are not necessarily updated in real time.
 
 ## Outstanding
+- Check the published site on a real iPhone and Android browser and run Google PageSpeed Insights after domain launch.
 - Confirm legal rights to reuse photographs and owner approval of text.
 - Connect Google Search Console and submit sitemap once domain points at this site.
 - Test redirects on Cloudflare after deploy; `_redirects` is a Cloudflare Pages feature.
