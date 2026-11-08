@@ -1,0 +1,13 @@
+# Preserve common page URLs from the original Wix website.
+/about /story.html 301
+/copy-of-about /menu.html 301
+/copy-of-menu /menu.html?service=lunch 301
+/copy-of-lunch-menu /menu.html?service=dinner 301
+/copy-of-lunch-menu-2 /menu.html?service=lunch 301
+/copy-of-lunch-menu-1 /menu.html 301
+/copy-of-dinner-menu /catering.html 301
+/copy-of-catering-menu /index.html 301
+/contact /visit.html 301
+/menu /menu.html 301
+/reservations /visit.html 301
+/ordering /menu.html 301
