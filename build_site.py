@@ -249,7 +249,6 @@ urls=['','menu.html','story.html','gallery.html','catering.html','visit.html']
 /copy-of-dinner-menu /catering.html 301
 /copy-of-catering-menu /visit.html 301
 /contact /visit.html 301
-/menu /menu.html 301
 /reservations /visit.html 301
 /ordering /menu.html 301
 ''',encoding='utf-8')
