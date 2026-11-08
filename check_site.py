@@ -12,6 +12,19 @@ class Quiet(SimpleHTTPRequestHandler):
 srv=ThreadingHTTPServer(('127.0.0.1',8765),Quiet)
 threading.Thread(target=srv.serve_forever,daemon=True).start()
 errs=[]
+# Cloudflare Workers defaults to extensionless page URLs. Redirecting
+# /page -> /page.html creates an infinite redirect loop, so catch this.
+redirects_path = root / '_redirects'
+if redirects_path.exists():
+ for line in redirects_path.read_text(encoding='utf-8').splitlines():
+  line = line.strip()
+  if not line or line.startswith('#'): continue
+  parts = line.split()
+  if len(parts) < 2: continue
+  source, target = parts[:2]
+  clean_target = urlparse(target).path
+  if clean_target.endswith('.html') and source == clean_target[:-5]:
+   errs.append(f'_redirects: infinite Cloudflare HTML canonicalization loop {source} -> {target}')
 for page in root.glob('*.html'):
  soup=BeautifulSoup(page.read_text(),'html.parser')
  for img in soup.find_all('img'):
